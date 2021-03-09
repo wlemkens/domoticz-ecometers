@@ -101,17 +101,17 @@ class BasePlugin:
             Domoticz.Error("monitorDevice: "+str(err))
 
     def readData(self):
-        Domoticz.Debug("Connecting to device on port {:}".format(self.port))
+        Domoticz.Log("Connecting to device on port {:}".format(self.port))
         with serial.Serial(self.port, 115200, bytesize=8, parity='N', stopbits=1, timeout=10) as ser:
                 Domoticz.Debug("Connected to device")
                 data = bytearray()
                 header = ser.read(2)
-                Domoticz.Debug("Received data")
+                Domoticz.Debug("Received data or timeout")
                 if header == b'SI':
-                    Domoticz.Debug("Received data with correct header")
+                    Domoticz.Log("Received data with correct header")
                     length_bytes = ser.read(2)
                     length = int.from_bytes(length_bytes, "big")
-                    Domoticz.debug("Receiving "+str(length)+" bytes")
+                    Domoticz.Debug("Receiving "+str(length)+" bytes")
                     payload = ser.read(length - 4)
                     Domoticz.Debug("Received whole message")
                     data.extend(header)
@@ -127,7 +127,7 @@ class BasePlugin:
 
     def registerData(self, datagram):
         tempF = datagram.payload[0] - 40
-        self.temperature = (tempF - 32) / 1.8
+        self.temperature = round((tempF - 32) / 1.8, 1)
         self.distance = int.from_bytes(datagram.payload[1:3], "big")
         self.level = 190 - self.distance
         self.usable = int.from_bytes(datagram.payload[3:5], "big")
