@@ -1,5 +1,7 @@
 # domoticz-ecometers
-Domoticz plugin for the Eco Meter S tank level sensor
+Domoticz plugin for the Eco Meter S tank level sensor.
+
+https://www.e-sensorix.com/product/ecometer-s
 
 # Description
 This plugin allows an Eco Meter S display connected to the computer running domoticz to read the live data from the display.
