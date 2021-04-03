@@ -14,7 +14,7 @@ Based on the info from https://sarnau.info/communication-protocol-of-the-proteus
 - python3-serial
 
 ## Domoticz
-1. Copy the plugin.py file to a sub directory in domoticz/plugins/. I.e.: /home/pi/domoticz/plugins/ecometers/plugin.py
+1. Copy the plugin.py file to a sub directory in domoticz/plugins/. I.e.: cd /home/pi/domoticz/plugins && git clone https://github.com/wlemkens/domoticz-ecometers.git
 2. In Domoticz under "Setup" -> "Hardware", add the "Ecometer S plugin"
 3. Select the correct com port. I.e.: /dev/ttyUSB0
 4. Set the correct tank height (like configured in the display)
